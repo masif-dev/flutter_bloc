@@ -12,11 +12,6 @@ class LoadedState extends PostsBlocState {
   LoadedState({required this.postsList});
 }
 
-class PostLoadedState extends PostsBlocState {
-  final Posts posts;
-  PostLoadedState({required this.posts});
-}
-
 class ErrorState extends PostsBlocState {
   final String message;
   ErrorState({required this.message});

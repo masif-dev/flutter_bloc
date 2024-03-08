@@ -9,7 +9,6 @@ part 'posts_bloc_state.dart';
 class PostsBlocBloc extends Bloc<PostsBlocEvent, PostsBlocState> {
   PostsBlocBloc() : super(InitialState()) {
     on<FetchDataEvent>(_fetchData);
-    on<FetchSinglePostEvent>(_fetchPostData);
     on<DeleteSinglePostEvent>(_deletePostData);
   }
   Future<void> _fetchData(
@@ -23,16 +22,6 @@ class PostsBlocBloc extends Bloc<PostsBlocEvent, PostsBlocState> {
     }
   }
 
-  Future<void> _fetchPostData(
-      FetchSinglePostEvent event, Emitter<PostsBlocState> emit) async {
-    emit(LoadingState());
-    try {
-      final posts = await PostsRepo.fetchSinglePostFromApi(event.postId);
-      emit(PostLoadedState(posts: posts));
-    } catch (e) {
-      emit(ErrorState(message: 'Failed to fetch data'));
-    }
-  }
 
   Future<void> _deletePostData(
       DeleteSinglePostEvent event, Emitter<PostsBlocState> emit) async {
